@@ -1,3 +1,6 @@
 <resources>
-    <string name="app_name">GoalTrackerAssignment</string>
+    <string name="app_name">GoalTracker</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+
 </resources>
