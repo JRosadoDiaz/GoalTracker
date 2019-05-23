@@ -9,4 +9,12 @@ public class Event {
     private boolean IsDone;
     private boolean IsAlarmOn;
 
+    public void setTitle(String title) {
+        this.Title = title;
+    }
+
+    public String getTitle() {
+        return Title;
+    }
+
 }
