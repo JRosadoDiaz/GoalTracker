@@ -1,22 +1,24 @@
 package com.example.joserosado.goaltrackerassignment;
 
+import android.support.annotation.NonNull;
+
 import com.example.joserosado.goaltrackerassignment.GoalTracker.Models.Event;
 import com.example.joserosado.goaltrackerassignment.GoalTracker.Models.Sprint;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 public class EFDatabaseHelper {
-    private List<Sprint> sprintList;
     private Sprint currentSprint;
 
     public EFDatabaseHelper() {
         currentSprint = new Sprint();
-
-        sprintList.add(currentSprint);
     }
 
-    public void populateSprint() {
+    public Sprint GetCurrentSprint() {
         Event eventOne = new Event();
         eventOne.setTitle("Work");
         Event eventTwo = new Event();
@@ -27,10 +29,7 @@ public class EFDatabaseHelper {
         currentSprint.Events.add(eventOne);
         currentSprint.Events.add(eventTwo);
         currentSprint.Events.add(eventThree);
-    }
 
-
-    public Sprint GetCurrentSprint() {
         return currentSprint;
     }
 }
