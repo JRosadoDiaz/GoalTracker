@@ -1,10 +1,8 @@
 package com.example.joserosado.goaltrackerassignment.GoalTracker.db;
 
-import android.app.Activity;
-import android.support.annotation.NonNull;
 import android.util.Log;
-import android.widget.Toast;
 
+import com.example.joserosado.goaltrackerassignment.GoalTracker.Models.Sprint;
 import com.example.joserosado.goaltrackerassignment.GoalTracker.Models.User;
 import com.example.joserosado.goaltrackerassignment.GoalTracker.Models.UserBuilder;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -14,7 +12,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 
 import java.util.HashMap;
@@ -31,28 +31,24 @@ public final class FirebaseManager {
         db = FirebaseFirestore.getInstance();
     }
 
-    public int CreateAccount(String email, String password) {
-        //TODO: Find a way to adjust result based on outcome
-        int result = 0;
-        auth.createUserWithEmailAndPassword(email, password)
+    public Task<AuthResult> createAccount(String email, String password) {
+        return auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(resultTask -> {
                     if(resultTask.isSuccessful())
                     {
                         Log.d(AUTH_TAG, "createUserWithEmail:success");
-                        AddUser();
+                        addUser();
                         signOut();
                     }else
                     {
                         Log.w(AUTH_TAG, "createUserWithEmail:failure", resultTask.getException());
                     }
                 });
-        return result;
     }
 
-    public int signIn(String email, String password)
+    public Task<AuthResult> signIn(String email, String password)
     {
-        int result = 0;
-        auth.signInWithEmailAndPassword(email, password)
+       return auth.signInWithEmailAndPassword(email, password)
         .addOnCompleteListener(task ->
                 {
                     if(task.isSuccessful())
@@ -63,20 +59,18 @@ public final class FirebaseManager {
                         Log.w(AUTH_TAG, "signInWithEmail:failure", task.getException());
                     }
                 });
-        return result;
     }
 
-    public int signOut()
+    public void signOut()
     {
         int result = 0;
         if(getSignedInUser() != null) {
             result = 1;
             auth.signOut();
         }
-        return result;
     }
 
-    private void AddUser()
+    private void addUser()
     {
         HashMap<String, Object> map = new HashMap<>();
         map.put("UserId", getSignedInUser().getUid());
@@ -85,13 +79,32 @@ public final class FirebaseManager {
         .addOnFailureListener(exception -> Log.w(DB_TAG, "Error adding document", exception));
     }
 
-    public void UpdateUser(HashMap<String, Object> map)
+    public Task<Void> updateUser(HashMap<String, Object> map)
     {
         FirebaseUser authUser = getSignedInUser();
-        if(authUser == null) return;
-        getUserDocument(authUser).set(map, SetOptions.merge())
+        if(authUser == null) return null;
+        return getUserDocument(authUser).set(map, SetOptions.merge())
                 .addOnSuccessListener(task -> Log.d(DB_TAG, "User added with ID: " + getSignedInUser().getUid()))
                 .addOnFailureListener(exception -> Log.w(DB_TAG, "Error adding document", exception));
+    }
+
+    public Sprint getCurrentSprint()
+    {
+        /*DocumentReference sprintRef = getCurrentSprintDocument(getSignedInUser());
+        sprintRef.get().onCompleteListener(task ->
+        {
+        });*/
+        return new Sprint();
+    }
+
+    public void updateSprint(Sprint sprint)
+    {
+
+    }
+
+    public void deleteSprint(Sprint sprint)
+    {
+
     }
 
     public FirebaseUser getSignedInUser()
@@ -111,17 +124,30 @@ public final class FirebaseManager {
 
     private DocumentReference getCurrentSprintDocument(FirebaseUser user)
     {
-        DocumentReference userSprint = getUserDocument(user);
-        getSprintDocuments(user).document();
+        /*DocumentReference sprintDoc =
+        if(user != null) {
+            getUserDocument(user).get().addOnCompleteListener(task ->
+            {
+                if (task.isSuccessful()) {
+                    possibleSprint = task.getResult().getDocumentReference("currentSprint");
+                }
+            });
+        }
+        return possibleSprint;*/
+        //TODO: find data
         return null;
     }
 
     public User getUserData()
     {
+        FirebaseUser user = getSignedInUser();
         UserBuilder builder = new UserBuilder();
-        getUserDocument(getSignedInUser()).get();
-        //.addOn;
-        return null;
+        getUserDocument(user).get();
+        builder.id(user.getUid())
+                .email(user.getEmail())
+                .currentSprint(getCurrentSprint())
+                .pastSprints(null);
+        return builder.returnUser();
     }
 
 }
