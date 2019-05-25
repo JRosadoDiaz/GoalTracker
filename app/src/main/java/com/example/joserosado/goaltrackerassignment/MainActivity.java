@@ -10,17 +10,20 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    EFDatabaseHelper Helper = new EFDatabaseHelper();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
         Button login_button = findViewById(R.id.login_button);
 
 
@@ -28,7 +31,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                // Testing Input of text views
+                {
+                    TextView PassWordText = findViewById(R.id.Password);
+                    String test = PassWordText.getText().toString();
+                    System.out.println(test);
+                }
+
                 WeekListActivityIntent();
+
+
+
             }
         });
     }
