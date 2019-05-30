@@ -1,5 +1,6 @@
 package com.example.joserosado.goaltrackerassignment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -21,8 +22,9 @@ public class WeekListActivity extends AppCompatActivity {
         sunday_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            setContentView(R.layout.add);
+                setContentView(R.layout.add);
                 // Testing Input of text views
+                AddActivityIntent(DAYS_OF_WEEK.SUNDAY);
 
             }
         });
@@ -34,6 +36,7 @@ public class WeekListActivity extends AppCompatActivity {
 
                 // Testing Input of text views
                 setContentView(R.layout.add);
+
 
 
             }
@@ -101,5 +104,15 @@ public class WeekListActivity extends AppCompatActivity {
 
             }
         });
+
+
+    }
+
+    private void AddActivityIntent(DAYS_OF_WEEK day){
+        Intent intent = new Intent(this,AddActivity.class);
+        intent.putExtra("DayOfTheWeek", day.toString());
+        startActivity(intent);
+        //Toast toast = Toast.makeText(getApplicationContext(),"Hits",Toast.LENGTH_SHORT);
+        //toast.show();
     }
 }
