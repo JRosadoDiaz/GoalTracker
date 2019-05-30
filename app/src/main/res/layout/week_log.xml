@@ -17,36 +17,49 @@
         android:id="@+id/weekListView"/> -->
     <Button
         android:id='@+id/sunday'
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:text="Sunday"/>
 
     <Button
         android:id='@+id/monday'
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:text="Monday"/>
+
 
     <Button
         android:id='@+id/tuesday'
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:text="Tuesday"/>
 
     <Button
         android:id='@+id/wednesday'
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:text="Wednesday"/>
+
 
     <Button
         android:id='@+id/thursday'
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:text="Thursday"/>
+
 
     <Button
         android:id='@+id/friday'
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:text="Friday"/>
+
+
 
     <Button
         android:id='@+id/saturday'
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+
+        android:text="Saturday"/>
 </LinearLayout>
