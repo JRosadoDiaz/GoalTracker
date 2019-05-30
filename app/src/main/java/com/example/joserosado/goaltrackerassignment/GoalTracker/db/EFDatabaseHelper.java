@@ -1,4 +1,4 @@
-package com.example.joserosado.goaltrackerassignment;
+package com.example.joserosado.goaltrackerassignment.GoalTracker.db;
 
 import android.support.annotation.NonNull;
 
