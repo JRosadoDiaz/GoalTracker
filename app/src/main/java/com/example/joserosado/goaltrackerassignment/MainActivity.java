@@ -29,11 +29,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 // Testing Input of text views
-                {
-                    TextView PassWordText = findViewById(R.id.Password);
-                    String test = PassWordText.getText().toString();
-                    System.out.println(test);
-                }
 
                 WeekListActivityIntent();
             }
