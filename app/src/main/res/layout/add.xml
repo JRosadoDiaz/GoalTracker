@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/txtName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -16,7 +16,7 @@
         tools:layout_editor_absoluteY="78dp" />
 
     <TextView
-        android:id="@+id/description"
+        android:id="@+id/txtDescription"
         android:layout_width="200dp"
         android:layout_height="150dp"
         android:text="TextView"
@@ -24,11 +24,19 @@
         tools:layout_editor_absoluteY="273dp" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/tmeEventTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="time"
         tools:layout_editor_absoluteX="99dp"
         tools:layout_editor_absoluteY="160dp" />
+
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        tools:layout_editor_absoluteX="161dp"
+        tools:layout_editor_absoluteY="517dp" />
 </android.support.constraint.ConstraintLayout>
