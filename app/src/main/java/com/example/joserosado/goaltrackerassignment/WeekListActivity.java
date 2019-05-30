@@ -1,18 +1,15 @@
 package com.example.joserosado.goaltrackerassignment;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.joserosado.goaltrackerassignment.GoalTracker.Models.Event;
 import com.example.joserosado.goaltrackerassignment.GoalTracker.Models.Sprint;
+import com.example.joserosado.goaltrackerassignment.GoalTracker.db.EFDatabaseHelper;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class WeekListActivity extends AppCompatActivity {
 
@@ -24,17 +21,18 @@ public class WeekListActivity extends AppCompatActivity {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.week_log);
         ListView weekList = (ListView)findViewById(R.id.weekListView);
-        weekNameList = new ArrayList<String>();
+        weekNameList = new ArrayList<>();
 
+        // This database helper is built with the basic information of a sprint and events
+        // Data inside is not finalized and not fully representative of what the data must contain
         EFDatabaseHelper Helper = new EFDatabaseHelper();
         currentSprint = Helper.GetCurrentSprint();
 
-        getWeekDays(); // Use Database helper to gather latest sprint
+        getWeekDays(); // Uses Database helper to gather latest sprint
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,weekNameList);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, weekNameList);
         weekList.setAdapter(arrayAdapter);
     }
-
 
     void getWeekDays(){
 /*        weekNameList.add("Sunday");
@@ -49,6 +47,4 @@ public class WeekListActivity extends AppCompatActivity {
             weekNameList.add(event.getTitle());
         }
     }
-
-
 }
