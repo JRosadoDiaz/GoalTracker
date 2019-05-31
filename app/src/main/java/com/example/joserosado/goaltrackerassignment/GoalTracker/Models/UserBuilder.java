@@ -9,7 +9,7 @@ public class UserBuilder {
         newInstance();
     }
 
-    public UserBuilder email(String email)
+  /*  public UserBuilder email(String email)
     {
         user.setEmail(email);
         return this;
@@ -31,7 +31,7 @@ public class UserBuilder {
     {
         user.setPastSprints(sprints);
         return this;
-    }
+    }*/
 
     public UserBuilder newInstance()
     {

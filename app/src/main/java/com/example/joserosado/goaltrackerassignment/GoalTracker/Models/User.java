@@ -9,6 +9,4 @@ public class User {
     private List<Sprint> PastSprints;
     private Sprint CurrentSprint;
     // TODO: add Config param
-
-
 }
