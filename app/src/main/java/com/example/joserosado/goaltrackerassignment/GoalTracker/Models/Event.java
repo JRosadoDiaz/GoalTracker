@@ -6,7 +6,7 @@ public class Event {
     private long Duration;
     private String Title;
     private String Description;
-    private boolean IsDone;
+    private boolean IsDone = false;
     private boolean IsAlarmOn;
 
     public void setTitle(String title) {
@@ -16,5 +16,9 @@ public class Event {
     public String getTitle() {
         return Title;
     }
+
+    public boolean switchIsDoneBoolean() { IsDone = !IsDone;}
+
+    public boolean getIsDone() { return IsDone; }
 
 }
