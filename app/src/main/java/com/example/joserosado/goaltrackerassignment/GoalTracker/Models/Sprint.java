@@ -10,9 +10,18 @@ import java.util.ListIterator;
 
 public class Sprint {
     public ArrayList<Event> Events;
+    private String sprintId;
 
     public Sprint() {
         Events = new ArrayList<>();
     }
 
+    public String getSprintId() {
+        return sprintId;
+    }
+
+    public void setSprintId(String id)
+    {
+        sprintId = id;
+    }
 }
