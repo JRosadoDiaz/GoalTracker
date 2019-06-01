@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.example.joserosado.goaltrackerassignment.GoalTracker.Models.Sprint;
 import com.example.joserosado.goaltrackerassignment.GoalTracker.Models.User;
+import com.example.joserosado.goaltrackerassignment.GoalTracker.Models.UserBuilder;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.auth.AuthResult;
