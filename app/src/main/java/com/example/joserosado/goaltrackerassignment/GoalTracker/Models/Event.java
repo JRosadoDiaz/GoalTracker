@@ -17,7 +17,7 @@ public class Event {
         return Title;
     }
 
-    public boolean switchIsDoneBoolean() { IsDone = !IsDone;}
+    public void switchIsDoneBoolean() { IsDone = !IsDone;}
 
     public boolean getIsDone() { return IsDone; }
 
