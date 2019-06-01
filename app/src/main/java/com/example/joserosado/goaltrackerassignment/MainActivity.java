@@ -6,31 +6,38 @@ import android.os.Bundle;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.joserosado.goaltrackerassignment.GoalTracker.db.EFDatabaseHelper;
+import com.example.joserosado.goaltrackerassignment.GoalTracker.db.FirebaseManager;
 
 public class MainActivity extends AppCompatActivity {
 
     EFDatabaseHelper Helper = new EFDatabaseHelper();
-
+    FirebaseManager manager = new FirebaseManager();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        EditText passwordField = findViewById(R.id.Password);
+        EditText emailField = findViewById(R.id.email);
         Button login_button = findViewById(R.id.login_button);
 
 
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                String password = passwordField.getText().toString();
+                String email = emailField.getText().toString();
                 // Testing Input of text views
+                if(password.isEmpty()) { Toast.makeText(getApplicationContext(), "Please input a password", Toast.LENGTH_SHORT).show();}
+                else if(email.isEmpty()) {Toast.makeText(getApplicationContext(), "Please input an email", Toast.LENGTH_SHORT).show();}
+                else{WeekListActivityIntent();}
 
-                WeekListActivityIntent();
             }
         });
     }
