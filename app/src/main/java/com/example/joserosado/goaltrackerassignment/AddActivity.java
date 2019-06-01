@@ -15,8 +15,6 @@ public class AddActivity extends AppCompatActivity {
         setContentView(R.layout.add);
 
         String DayOfTheWeek = getIntent().getStringExtra("DayOfTheWeek");
-
-        System.out.println(DayOfTheWeek);
         Toast toastDay = Toast.makeText(getApplicationContext(), DayOfTheWeek,Toast.LENGTH_SHORT);
         toastDay.show();
 

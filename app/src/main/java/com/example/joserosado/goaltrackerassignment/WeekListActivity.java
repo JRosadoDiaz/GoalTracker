@@ -104,8 +104,6 @@ public class WeekListActivity extends AppCompatActivity {
 
             }
         });
-
-
     }
 
     private void AddActivityIntent(DAYS_OF_WEEK day){
