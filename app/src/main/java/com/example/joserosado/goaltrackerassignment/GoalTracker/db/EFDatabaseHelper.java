@@ -32,4 +32,14 @@ public class EFDatabaseHelper {
 
         return currentSprint;
     }
+
+    public Event GetEvent() {
+        return new Event() {
+            
+        };
+    }
+
+    public void SaveEvent(Event event) {
+
+    }
 }
