@@ -35,7 +35,7 @@ public class EFDatabaseHelper {
 
     public Event GetEvent() {
         return new Event() {
-            
+
         };
     }
 
