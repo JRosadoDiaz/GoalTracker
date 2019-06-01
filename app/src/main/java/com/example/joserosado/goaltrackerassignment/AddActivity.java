@@ -1,6 +1,7 @@
 package com.example.joserosado.goaltrackerassignment;
 
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -39,4 +40,12 @@ public class AddActivity extends AppCompatActivity {
             }
         });
     }
+
+  //  private void notifTest(){
+        //NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+
+         //       .setContentTitle("Testing")
+       //         .setContentText("Testing")
+     //           .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+   // }
 }
