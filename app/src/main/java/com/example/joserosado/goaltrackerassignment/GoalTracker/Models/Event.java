@@ -13,9 +13,7 @@ public class Event {
         this.Title = title;
     }
 
-    public String getTitle() {
-        return Title;
-    }
+    public String getTitle() { return Title; }
 
     public void switchIsDoneBoolean() { IsDone = !IsDone;}
 
