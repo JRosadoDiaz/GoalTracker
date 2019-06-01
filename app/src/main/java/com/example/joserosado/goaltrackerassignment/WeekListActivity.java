@@ -1,54 +1,118 @@
 package com.example.joserosado.goaltrackerassignment;
 
-import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
-
-import com.example.joserosado.goaltrackerassignment.GoalTracker.Models.Event;
-import com.example.joserosado.goaltrackerassignment.GoalTracker.Models.Sprint;
-
-import java.util.ArrayList;
-import java.util.List;
+import android.view.View;
+import android.widget.Button;
 
 public class WeekListActivity extends AppCompatActivity {
 
-    ArrayList<String> weekNameList;
-    Sprint currentSprint;
-
     @Override
-    public void onCreate(Bundle saveInstanceState){
-        super.onCreate(saveInstanceState);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.week_log);
-        ListView weekList = (ListView)findViewById(R.id.weekListView);
-        weekNameList = new ArrayList<String>();
-
-        EFDatabaseHelper Helper = new EFDatabaseHelper();
-        currentSprint = Helper.GetCurrentSprint();
-
-        getWeekDays(); // Use Database helper to gather latest sprint
-
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,weekNameList);
-        weekList.setAdapter(arrayAdapter);
+        createHandlers();
     }
 
+    private void createHandlers(){
+        Button sunday_button = findViewById(R.id.sunday);
 
-    void getWeekDays(){
-/*        weekNameList.add("Sunday");
-        weekNameList.add("Monday");
-        weekNameList.add("Tuesday");
-        weekNameList.add("Wednesday");
-        weekNameList.add("Thursday");
-        weekNameList.add("Friday");
-        weekNameList.add("Saturday");*/
 
-        for (Event event: currentSprint.Events) {
-            weekNameList.add(event.getTitle());
-        }
+        sunday_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setContentView(R.layout.add);
+                // Testing Input of text views
+                AddActivityIntent(DAYS_OF_WEEK.SUNDAY);
+
+            }
+        });
+        Button monday_button = findViewById(R.id.monday);
+
+        monday_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Testing Input of text views
+                setContentView(R.layout.add);
+
+
+
+            }
+        });
+        Button tuesday_button = findViewById(R.id.tuesday);
+
+
+        tuesday_button .setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Testing Input of text views
+
+
+            }
+        });
+        Button wednesday_button = findViewById(R.id.wednesday);
+
+
+        wednesday_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Testing Input of text views
+                setContentView(R.layout.add);
+
+
+            }
+        });
+        Button thursday_button = findViewById(R.id.thursday);
+
+
+        thursday_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Testing Input of text views
+                setContentView(R.layout.add);
+
+
+            }
+        });
+        Button friday_button = findViewById(R.id.friday);
+
+
+        friday_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Testing Input of text views
+                setContentView(R.layout.add);
+
+
+            }
+        });
+        Button saturday_button = findViewById(R.id.saturday);
+
+
+        saturday_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Testing Input of text views
+                setContentView(R.layout.add);
+
+            }
+        });
+
+
     }
 
-
+    private void AddActivityIntent(DAYS_OF_WEEK day){
+        Intent intent = new Intent(this,AddActivity.class);
+        intent.putExtra("DayOfTheWeek", day.toString());
+        startActivity(intent);
+        //Toast toast = Toast.makeText(getApplicationContext(),"Hits",Toast.LENGTH_SHORT);
+        //toast.show();
+    }
 }

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <ListView
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--<ListView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_marginTop="177dp"
@@ -13,5 +14,52 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/weekListView"/>
+        android:id="@+id/weekListView"/> -->
+    <Button
+        android:id='@+id/sunday'
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:text="Sunday"/>
+
+    <Button
+        android:id='@+id/monday'
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:text="Monday"/>
+
+
+    <Button
+        android:id='@+id/tuesday'
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:text="Tuesday"/>
+
+    <Button
+        android:id='@+id/wednesday'
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:text="Wednesday"/>
+
+
+    <Button
+        android:id='@+id/thursday'
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:text="Thursday"/>
+
+
+    <Button
+        android:id='@+id/friday'
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:text="Friday"/>
+
+
+
+    <Button
+        android:id='@+id/saturday'
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+
+        android:text="Saturday"/>
 </LinearLayout>

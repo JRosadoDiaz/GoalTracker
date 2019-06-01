@@ -1,7 +1,7 @@
 package com.example.joserosado.goaltrackerassignment.GoalTracker.Models;
 
 public class Event {
-    private String Id;
+    private String Id; // Do we really need to store the ID locally?
     private String StartTime;
     private long Duration;
     private String Title;
