@@ -22,7 +22,6 @@ public class WeekListActivity extends AppCompatActivity {
         sunday_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setContentView(R.layout.add);
                 // Testing Input of text views
                 AddActivityIntent(DAYS_OF_WEEK.SUNDAY);
 
@@ -34,10 +33,8 @@ public class WeekListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                // Testing Input of text views
-                setContentView(R.layout.add);
-
-
+                // Testing Input of text view
+                AddActivityIntent(DAYS_OF_WEEK.MONDAY);
 
             }
         });
@@ -49,7 +46,7 @@ public class WeekListActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 // Testing Input of text views
-
+                AddActivityIntent(DAYS_OF_WEEK.TUESDAY);
 
             }
         });
@@ -61,7 +58,7 @@ public class WeekListActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 // Testing Input of text views
-                setContentView(R.layout.add);
+                AddActivityIntent(DAYS_OF_WEEK.WEDNESDAY);
 
 
             }
@@ -74,7 +71,7 @@ public class WeekListActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 // Testing Input of text views
-                setContentView(R.layout.add);
+                AddActivityIntent(DAYS_OF_WEEK.THURSDAY);
 
 
             }
@@ -87,7 +84,7 @@ public class WeekListActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 // Testing Input of text views
-                setContentView(R.layout.add);
+                AddActivityIntent(DAYS_OF_WEEK.FRIDAY);
 
 
             }
@@ -100,12 +97,10 @@ public class WeekListActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 // Testing Input of text views
-                setContentView(R.layout.add);
+                AddActivityIntent(DAYS_OF_WEEK.SATURDAY);
 
             }
         });
-
-
     }
 
     private void AddActivityIntent(DAYS_OF_WEEK day){
