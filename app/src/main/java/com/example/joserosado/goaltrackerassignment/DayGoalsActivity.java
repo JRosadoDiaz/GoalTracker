@@ -46,7 +46,7 @@ public class DayGoalsActivity extends AppCompatActivity {
 
     private void AddActivityIntent(String day){
         Intent intent = new Intent(this,AddActivity.class);
-        intent.putExtra("DayOfTheWeek", day.toString());
+        intent.putExtra("DayOfTheWeek", day);
         startActivity(intent);
         //Toast toast = Toast.makeText(getApplicationContext(),"Hits",Toast.LENGTH_SHORT);
         //toast.show();
