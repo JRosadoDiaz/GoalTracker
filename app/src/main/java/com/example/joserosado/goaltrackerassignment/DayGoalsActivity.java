@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.joserosado.goaltrackerassignment.GoalTracker.Models.Event;
@@ -14,21 +17,23 @@ import com.example.joserosado.goaltrackerassignment.GoalTracker.db.EFDatabaseHel
 public class DayGoalsActivity extends AppCompatActivity {
     EFDatabaseHelper helper = new EFDatabaseHelper();
 
-    String day;
+  //  String day;
 
 
 
-    public DayGoalsActivity(){
-        day = getIntent().getStringExtra("DayOfTheWeek");
+    //public DayGoalsActivity(){
+      //  day = getIntent().getStringExtra("DayOfTheWeek");
 
-    }
+    //}
 
+    LinearLayout linearLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        String day = getIntent().getStringExtra("DayOfTheWeek");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.day_goals);
-
-        Sprint currentSprint = helper.GetCurrentSprint();
+        TextView dayView = (TextView)findViewById(R.id.dayView);
+        dayView.setText(day);
 
         Button add_button = findViewById(R.id.add_button);
         add_button.setOnClickListener(new View.OnClickListener() {
@@ -39,14 +44,28 @@ public class DayGoalsActivity extends AppCompatActivity {
                 AddActivityIntent(day);
             }
         });
+        createList();
+    }
+
+    private void  createList(){
+        Sprint currentSprint = helper.GetCurrentSprint();
+        linearLayout = findViewById(R.id.day_list);
         for (Event item : currentSprint.Events ) {
+            TextView tv = new TextView(this);
+            tv.setText(item.getTitle());
+            CheckBox cb = new CheckBox(this);
+            if(item.getIsDone() == true){
+                cb.setChecked(true);
+            }
+            linearLayout.addView(tv);
+            linearLayout.addView(cb);
 
         }
     }
 
     private void AddActivityIntent(String day){
         Intent intent = new Intent(this,AddActivity.class);
-        intent.putExtra("DayOfTheWeek", day.toString());
+        intent.putExtra("DayOfTheWeek", day);
         startActivity(intent);
         //Toast toast = Toast.makeText(getApplicationContext(),"Hits",Toast.LENGTH_SHORT);
         //toast.show();

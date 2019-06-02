@@ -21,6 +21,7 @@ public class EFDatabaseHelper {
     public Sprint GetCurrentSprint() {
         Event eventOne = new Event();
         eventOne.setTitle("Work");
+        eventOne.setIsDone(true);
 
         Event eventTwo = new Event();
         eventTwo.setTitle("Date");
