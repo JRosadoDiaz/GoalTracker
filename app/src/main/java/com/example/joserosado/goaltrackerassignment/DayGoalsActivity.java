@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +26,7 @@ public class DayGoalsActivity extends AppCompatActivity {
 
     //}
 
+    LinearLayout linearLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         String day = getIntent().getStringExtra("DayOfTheWeek");
@@ -31,7 +34,7 @@ public class DayGoalsActivity extends AppCompatActivity {
         setContentView(R.layout.day_goals);
         TextView dayView = (TextView)findViewById(R.id.dayView);
         dayView.setText(day);
-        Sprint currentSprint = helper.GetCurrentSprint();
+
         Button add_button = findViewById(R.id.add_button);
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,8 +44,19 @@ public class DayGoalsActivity extends AppCompatActivity {
                 AddActivityIntent(day);
             }
         });
-        for (Event item : currentSprint.Events ) {
+        createList();
+    }
 
+    private void  createList(){
+        Sprint currentSprint = helper.GetCurrentSprint();
+        linearLayout = findViewById(R.id.day_list);
+        for (Event item : currentSprint.Events ) {
+            CheckBox cb = new CheckBox(this);
+            cb.setText(item.getTitle());
+            if(item.getIsDone() == true){
+                cb.setChecked(true);
+            }
+            linearLayout.addView(cb);
         }
     }
 
