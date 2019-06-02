@@ -51,12 +51,15 @@ public class DayGoalsActivity extends AppCompatActivity {
         Sprint currentSprint = helper.GetCurrentSprint();
         linearLayout = findViewById(R.id.day_list);
         for (Event item : currentSprint.Events ) {
+            TextView tv = new TextView(this);
+            tv.setText(item.getTitle());
             CheckBox cb = new CheckBox(this);
-            cb.setText(item.getTitle());
             if(item.getIsDone() == true){
                 cb.setChecked(true);
             }
+            linearLayout.addView(tv);
             linearLayout.addView(cb);
+
         }
     }
 
