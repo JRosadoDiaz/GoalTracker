@@ -105,7 +105,7 @@ public class WeekListActivity extends AppCompatActivity {
 
     private void AddActivityIntent(DAYS_OF_WEEK day){
         Intent intent = new Intent(this,AddActivity.class);
-        intent.putExtra("DayOfTheWeek", day.toString());
+        intent.putExtra("DayOfTheWeek", day);
         startActivity(intent);
         //Toast toast = Toast.makeText(getApplicationContext(),"Hits",Toast.LENGTH_SHORT);
         //toast.show();
