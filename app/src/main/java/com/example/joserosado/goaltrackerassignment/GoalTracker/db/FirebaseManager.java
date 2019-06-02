@@ -76,18 +76,18 @@ public final class FirebaseManager {
                 -> Log.w(DB_TAG, "Error adding document", exception));
     }
 
-    public void updateUser(User user)
+    public Task<Void> updateUser(User user)
     {
         FirebaseUser authUser = getSignedInUser();
-        if(authUser == null) return;
-        getUserDocument(authUser).set(user, SetOptions.merge())
+        if(authUser == null) return null;
+        return getUserDocument(authUser).set(user, SetOptions.merge())
                 .addOnSuccessListener(task
                         -> Log.d(DB_TAG, "User with ID: " + getSignedInUser().getUid() + " updated"))
                 .addOnFailureListener(exception
                         -> Log.w(DB_TAG, "Error updating document", exception));
     }
 
-    public Sprint getCurrentSprint(){
+    public Task<Sprint> getCurrentSprint(){
         DocumentReference sprintRef = getCurrentSprintDocument(getSignedInUser());
         Sprint taskedSprint = null;
         Task<Sprint> getSprint = sprintRef.get().onSuccessTask(result -> Tasks.call(()->
@@ -98,11 +98,15 @@ public final class FirebaseManager {
             //sprint.Events.add();
             return sprint;
         }));
-        taskedSprint = getSprint.isSuccessful() ? getSprint.getResult() : createNewSprint();
-        return taskedSprint;
+        return getSprint;
     }
 
-    public Sprint createNewSprint() {
+    public Task<Sprint> createNewSprint()
+    {
+        return Tasks.call(this::createNewSprintMethod);
+    }
+
+    private Sprint createNewSprintMethod() {
         Sprint sprint = new Sprint();
         sprint.setSprintId("StartingValue");
         CollectionReference sprintsRef = getSprintDocuments(getSignedInUser());
@@ -118,26 +122,26 @@ public final class FirebaseManager {
         return sprint;
     }
 
-    public void archiveCurrentSprint()
+    public Task<Void> archiveCurrentSprint()
     {
         DocumentReference sprintRef = getUserDocument(getSignedInUser());
-        sprintRef.update("currentSprint", null);
+        return sprintRef.update("currentSprint", null);
     }
 
-    public void updateSprint(Sprint sprint)
+    public Task<Void> updateSprint(Sprint sprint)
     {
         DocumentReference sprintRef = getSprintDocuments(getSignedInUser()).document(sprint.getSprintId());
-        sprintRef.set(sprint, SetOptions.merge()).addOnCompleteListener(task ->
+        return sprintRef.set(sprint, SetOptions.merge()).addOnCompleteListener(task ->
         {
            if(task.isSuccessful()) Log.d(DB_TAG, String.format("Sprint %s was updated successfully", sprint.getSprintId()));
                else Log.d(DB_TAG, "Sprint update failed", task.getException());
         });
     }
 
-    public void deleteSprint(Sprint sprint)
+    public Task<Void> deleteSprint(Sprint sprint)
     {
         DocumentReference sprintRef = getSprintDocuments(getSignedInUser()).document(sprint.getSprintId());
-        sprintRef.delete().addOnCompleteListener(task ->
+        return sprintRef.delete().addOnCompleteListener(task ->
         {
             if(task.isSuccessful()) Log.d(DB_TAG, String.format("Sprint %s was deleted successfully", sprint.getSprintId()));
             else Log.d(DB_TAG, "Sprint delete failed", task.getException());
@@ -169,7 +173,12 @@ public final class FirebaseManager {
         return reference;
     }
 
-    public User getUserData()
+    public Task<User> getUserData()
+    {
+        return Tasks.call(this::getUserDataMethod);
+    }
+
+    private User getUserDataMethod()
     {
         FirebaseUser user = getSignedInUser();
         getUserDocument(user).get();
