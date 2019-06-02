@@ -31,15 +31,42 @@ public class MainActivity extends AppCompatActivity {
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                boolean isValid = true;
                 String password = passwordField.getText().toString();
                 String email = emailField.getText().toString();
                 // Testing Input of text views
-                if(password.isEmpty()) { Toast.makeText(getApplicationContext(), "Please input a password", Toast.LENGTH_SHORT).show();}
-                else if(email.isEmpty()) {Toast.makeText(getApplicationContext(), "Please input an email", Toast.LENGTH_SHORT).show();}
-                else{WeekListActivityIntent();}
+                if(password.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Please input a password", Toast.LENGTH_SHORT).show();
+                    isValid = false;
+                }
+                else if(email.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Please input an email", Toast.LENGTH_SHORT).show();
+                    isValid = false;
+                }
+                if(isValid)
+                {
+                    attemptSignIn(email, password);
+                }
+
 
             }
         });
+    }
+
+    private void attemptSignIn(String email, String password)
+    {
+        manager.signIn(email, password)
+              .addOnCompleteListener(task ->{
+                  if(task.isSuccessful() && task.getResult().getUser() != null)
+                  {
+                      WeekListActivityIntent();
+                  }else
+                  {
+                      Toast.makeText(getApplicationContext(), "Your email or password is incorrect, please try again", Toast.LENGTH_SHORT)
+                              .show();
+                  }
+              });
+
     }
 
     private void WeekListActivityIntent(){
