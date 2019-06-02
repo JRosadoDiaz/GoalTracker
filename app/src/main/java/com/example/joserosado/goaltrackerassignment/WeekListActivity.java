@@ -23,6 +23,7 @@ public class WeekListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Testing Input of text views
+
                 DayGoalsActivityIntent(DAYS_OF_WEEK.SUNDAY);
 
             }

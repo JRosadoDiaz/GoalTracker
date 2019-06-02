@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.joserosado.goaltrackerassignment.GoalTracker.Models.Event;
@@ -14,22 +15,23 @@ import com.example.joserosado.goaltrackerassignment.GoalTracker.db.EFDatabaseHel
 public class DayGoalsActivity extends AppCompatActivity {
     EFDatabaseHelper helper = new EFDatabaseHelper();
 
-    String day;
+  //  String day;
 
 
 
-    public DayGoalsActivity(){
-        day = getIntent().getStringExtra("DayOfTheWeek");
+    //public DayGoalsActivity(){
+      //  day = getIntent().getStringExtra("DayOfTheWeek");
 
-    }
+    //}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        String day = getIntent().getStringExtra("DayOfTheWeek");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.day_goals);
-
+        TextView dayView = (TextView)findViewById(R.id.dayView);
+        dayView.setText(day);
         Sprint currentSprint = helper.GetCurrentSprint();
-
         Button add_button = findViewById(R.id.add_button);
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
