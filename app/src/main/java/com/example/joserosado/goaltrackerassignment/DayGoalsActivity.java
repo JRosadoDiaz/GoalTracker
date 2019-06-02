@@ -40,7 +40,6 @@ public class DayGoalsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Testing Input of text views
-                setContentView(R.layout.add);
                 AddActivityIntent(day);
             }
         });
