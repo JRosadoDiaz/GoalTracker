@@ -21,8 +21,11 @@ public class EFDatabaseHelper {
     public Sprint GetCurrentSprint() {
         Event eventOne = new Event();
         eventOne.setTitle("Work");
+        eventOne.setIsDone(true);
+
         Event eventTwo = new Event();
         eventTwo.setTitle("Date");
+
         Event eventThree = new Event();
         eventThree.setTitle("Sports game");
 
@@ -31,5 +34,15 @@ public class EFDatabaseHelper {
         currentSprint.Events.add(eventThree);
 
         return currentSprint;
+    }
+
+    public Event GetEvent() {
+        return new Event() {
+
+        };
+    }
+
+    public void SaveEvent(Event event) {
+
     }
 }

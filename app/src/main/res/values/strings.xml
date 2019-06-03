@@ -2,5 +2,9 @@
     <string name="app_name">GoalTracker</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
-
+    <string name="eventTitle">Name</string>
+    <string name="eventTime">Time</string>
+    <string name="eventDescription">Desc.</string>
+    <string name="event_name">Desc.</string>
+    <string name="day">Day</string>
 </resources>

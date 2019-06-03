@@ -6,15 +6,19 @@ public class Event {
     private long Duration;
     private String Title;
     private String Description;
-    private boolean IsDone;
+    private boolean IsDone = false;
     private boolean IsAlarmOn;
 
     public void setTitle(String title) {
         this.Title = title;
     }
+    public void setIsDone(boolean isDone){this.IsDone = isDone;}
 
-    public String getTitle() {
-        return Title;
-    }
+
+    public String getTitle() { return Title; }
+
+    public void switchIsDoneBoolean() { IsDone = !IsDone;}
+
+    public boolean getIsDone() { return IsDone; }
 
 }
