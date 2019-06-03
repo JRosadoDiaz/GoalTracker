@@ -12,6 +12,8 @@ public class Event {
     public void setTitle(String title) {
         this.Title = title;
     }
+    public void setIsDone(boolean isDone){this.IsDone = isDone;}
+
 
     public String getTitle() { return Title; }
 

@@ -23,7 +23,8 @@ public class WeekListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Testing Input of text views
-                AddActivityIntent(DAYS_OF_WEEK.SUNDAY);
+
+                DayGoalsActivityIntent(DAYS_OF_WEEK.SUNDAY);
 
             }
         });
@@ -34,7 +35,7 @@ public class WeekListActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 // Testing Input of text view
-                AddActivityIntent(DAYS_OF_WEEK.MONDAY);
+                DayGoalsActivityIntent(DAYS_OF_WEEK.MONDAY);
 
             }
         });
@@ -46,7 +47,7 @@ public class WeekListActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 // Testing Input of text views
-                AddActivityIntent(DAYS_OF_WEEK.TUESDAY);
+                DayGoalsActivityIntent(DAYS_OF_WEEK.TUESDAY);
 
             }
         });
@@ -58,7 +59,7 @@ public class WeekListActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 // Testing Input of text views
-                AddActivityIntent(DAYS_OF_WEEK.WEDNESDAY);
+                DayGoalsActivityIntent(DAYS_OF_WEEK.WEDNESDAY);
 
 
             }
@@ -71,7 +72,7 @@ public class WeekListActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 // Testing Input of text views
-                AddActivityIntent(DAYS_OF_WEEK.THURSDAY);
+                DayGoalsActivityIntent(DAYS_OF_WEEK.THURSDAY);
 
 
             }
@@ -84,7 +85,7 @@ public class WeekListActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 // Testing Input of text views
-                AddActivityIntent(DAYS_OF_WEEK.FRIDAY);
+                DayGoalsActivityIntent(DAYS_OF_WEEK.FRIDAY);
 
 
             }
@@ -97,14 +98,14 @@ public class WeekListActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 // Testing Input of text views
-                AddActivityIntent(DAYS_OF_WEEK.SATURDAY);
+                DayGoalsActivityIntent(DAYS_OF_WEEK.SATURDAY);
 
             }
         });
     }
 
-    private void AddActivityIntent(DAYS_OF_WEEK day){
-        Intent intent = new Intent(this,AddActivity.class);
+    private void DayGoalsActivityIntent(DAYS_OF_WEEK day){
+        Intent intent = new Intent(this,DayGoalsActivity.class);
         intent.putExtra("DayOfTheWeek", day.toString());
         startActivity(intent);
         //Toast toast = Toast.makeText(getApplicationContext(),"Hits",Toast.LENGTH_SHORT);
