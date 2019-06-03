@@ -89,7 +89,6 @@ public final class FirebaseManager {
 
     public Task<Sprint> getCurrentSprint(){
         DocumentReference sprintRef = getCurrentSprintDocument(getSignedInUser());
-        Sprint taskedSprint = null;
         Task<Sprint> getSprint = sprintRef.get().onSuccessTask(result -> Tasks.call(()->
         {
             Sprint sprint = new Sprint();
@@ -101,9 +100,14 @@ public final class FirebaseManager {
         return getSprint;
     }
 
-    public Task<Sprint> createNewSprint()
+    public Task<Sprint> createNewSprint(boolean willBeCurrentSprint)
     {
-        return Tasks.call(this::createNewSprintMethod);
+        Task<Sprint> createSprint = Tasks.call(this::createNewSprintMethod);
+        if(willBeCurrentSprint && createSprint.isSuccessful())
+        {
+            createSprint.onSuccessTask(sprint -> Tasks.call(() -> {return setCurrentSprint(sprint);}));
+        }
+        return createSprint;
     }
 
     private Sprint createNewSprintMethod() {
@@ -120,6 +124,13 @@ public final class FirebaseManager {
         }).addOnFailureListener(failedCreationTask
                 -> Log.d(DB_TAG, "Sprint Creation Failed", failedCreationTask));
         return sprint;
+    }
+
+    public Task<Void> setCurrentSprint(Sprint sprint)
+    {
+        FirebaseUser user = getSignedInUser();
+        return getUserDocument(user).update("currentSprint",
+                getSprintDocuments(user).document(sprint.getSprintId()));
     }
 
     public Task<Void> archiveCurrentSprint()
