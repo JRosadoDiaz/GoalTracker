@@ -17,7 +17,7 @@ public class Register extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.register);
 
         EditText passwordRegister = findViewById(R.id.registerpassword);
         EditText passwordConfirm = findViewById(R.id.confirmText);
@@ -45,6 +45,11 @@ public class Register extends AppCompatActivity {
                 else if(confirm.isEmpty()){
                     Toast.makeText(getApplicationContext(), "Please confirm your password", Toast.LENGTH_SHORT).show();
                     isRegister = false;
+                }else if(!confirm.equals(password))
+                {
+                    Toast.makeText(getApplicationContext(), "Your passwords do not match, please try again", Toast.LENGTH_SHORT)
+                            .show();
+                    isRegister = false;
                 }
                 if(isRegister)
                 {
@@ -57,7 +62,7 @@ public class Register extends AppCompatActivity {
 
     private void attemptRegister(String email, String password)
     {
-        manager.signIn(email, password)
+        manager.createAccount(email, password)
                 .addOnCompleteListener(task ->{
                     if(task.isSuccessful() && task.getResult().getUser() != null)
                     {
@@ -72,8 +77,7 @@ public class Register extends AppCompatActivity {
     }
 
     private void BacktoLogin(){
-        Intent intent = new Intent(this,MainActivity.class);
-        startActivity(intent);
+        finish();
     }
 
 }
