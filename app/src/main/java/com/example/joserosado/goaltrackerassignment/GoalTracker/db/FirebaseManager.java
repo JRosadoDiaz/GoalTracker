@@ -38,13 +38,13 @@ public final class FirebaseManager {
         db = FirebaseFirestore.getInstance();
     }
 
-    public Task<Void> createAccount(String email, String password) {
-        return auth.createUserWithEmailAndPassword(email, password).onSuccessTask(result -> {return addUser();} )
+    public Task<AuthResult> createAccount(String email, String password) {
+        return auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(resultTask -> {
                     if(resultTask.isSuccessful())
                     {
                         Log.d(AUTH_TAG, "createUserWithEmail:success");
-                        signOut();
+                        addUser();
                     }else
                     {
                         Log.w(AUTH_TAG, "createUserWithEmail:failure", resultTask.getException());
@@ -74,11 +74,11 @@ public final class FirebaseManager {
         }
     }
 
-    private Task<Void> addUser()
+    private void addUser()
     {
         HashMap<String, Object> map = new HashMap<>();
         map.put("UserId", getSignedInUser().getUid());
-        return db.collection("users").document().set(map)
+        db.collection("users").document().set(map)
         .addOnSuccessListener(task
                 -> Log.d(DB_TAG, "User added with ID: " + getSignedInUser().getUid()))
         .addOnFailureListener(exception

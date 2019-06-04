@@ -53,7 +53,6 @@ public class Register extends AppCompatActivity {
                 }
                 if(isRegister)
                 {
-                    manager.createAccount(email, password);
                     attemptRegister(email,password);
                 }
             }
