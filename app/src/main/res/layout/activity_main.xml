@@ -7,6 +7,16 @@
     tools:context=".MainActivity">
 
 
+    <TextView
+        android:id="@+id/emailLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="175dp"
+        android:text="Email"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <EditText
         android:id="@+id/email"
         android:layout_width="wrap_content"
