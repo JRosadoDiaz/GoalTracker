@@ -7,16 +7,6 @@
     tools:context=".MainActivity">
 
 
-    <TextView
-        android:id="@+id/emailLabel"
-        android:layout_width="100dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="175dp"
-        android:text="Email"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <EditText
         android:id="@+id/email"
         android:layout_width="wrap_content"
@@ -25,17 +15,7 @@
         android:ems="10"
         android:hint="Email"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailLabel" />
-
-    <TextView
-        android:id="@+id/passwordLabel"
-        android:text = "Password"
-        android:layout_width="100dp"
-        android:layout_height="25dp"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="100dp"
-        app:layout_constraintBottom_toTopOf="@+id/Password"
-        />
+        tools:layout_editor_absoluteY="200dp" />
 
     <EditText
         android:id="@+id/Password"
@@ -59,6 +39,20 @@
         android:text="Submit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/lnkRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="New to GoalTracker? Register here!"
+        android:textColor="#3F51B5"
+        android:textSize="20dp"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="334dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="getRegisterIntent"/>
 
     <Button
         android:id="@+id/Notification_Test"

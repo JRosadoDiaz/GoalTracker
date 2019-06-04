@@ -10,9 +10,11 @@ import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.joserosado.goaltrackerassignment.GoalTracker.db.EFDatabaseHelper;
@@ -34,7 +36,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        TextView register = (TextView)findViewById(R.id.lnkRegister);
+        register.setMovementMethod(LinkMovementMethod.getInstance());
         EditText passwordField = findViewById(R.id.Password);
         EditText emailField = findViewById(R.id.email);
         Button login_button = findViewById(R.id.login_button);
@@ -105,6 +108,12 @@ public class MainActivity extends AppCompatActivity {
                   }
               });
 
+    }
+
+    public void getRegisterIntent(View v)
+    {
+        Intent intent = new Intent(this, Register.class);
+        startActivity(intent);
     }
 
     private void WeekListActivityIntent(){
