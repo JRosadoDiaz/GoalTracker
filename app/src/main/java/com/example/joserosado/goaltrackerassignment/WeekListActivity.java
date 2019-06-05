@@ -5,8 +5,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.example.joserosado.goaltrackerassignment.GoalTracker.db.FirebaseManager;
 
 public class WeekListActivity extends AppCompatActivity {
+
+    FirebaseManager manager = new FirebaseManager();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,7 +113,7 @@ public class WeekListActivity extends AppCompatActivity {
         Intent intent = new Intent(this,DayGoalsActivity.class);
         intent.putExtra("DayOfTheWeek", day.toString());
         startActivity(intent);
-        //Toast toast = Toast.makeText(getApplicationContext(),"Hits",Toast.LENGTH_SHORT);
-        //toast.show();
+        //Toast.makeText(getApplicationContext(),manager.getSignedInUser().getEmail(),Toast.LENGTH_SHORT)
+        //.show();
     }
 }

@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.joserosado.goaltrackerassignment.GoalTracker.Models.Sprint;
 import com.example.joserosado.goaltrackerassignment.GoalTracker.db.EFDatabaseHelper;
 import com.example.joserosado.goaltrackerassignment.GoalTracker.db.FirebaseManager;
 
@@ -22,7 +23,6 @@ import static android.support.v4.app.NotificationCompat.PRIORITY_DEFAULT;
 
 public class MainActivity extends AppCompatActivity {
 
-    EFDatabaseHelper Helper = new EFDatabaseHelper();
     FirebaseManager manager = new FirebaseManager();
     private static final String CHANNEL_ID="timer_notification";
     private static final String CHANNEL_NAME="Notification";
@@ -59,8 +59,6 @@ public class MainActivity extends AppCompatActivity {
                 {
                     attemptSignIn(email, password);
                 }
-
-
             }
         });
 
@@ -98,6 +96,8 @@ public class MainActivity extends AppCompatActivity {
                   if(task.isSuccessful() && task.getResult().getUser() != null)
                   {
                       WeekListActivityIntent();
+                      //Toast.makeText(getApplicationContext(), manager.getSignedInUser().getEmail(), Toast.LENGTH_SHORT)
+                      //.show();
                   }else
                   {
                       Toast.makeText(getApplicationContext(), "Your email or password is incorrect, please try again", Toast.LENGTH_SHORT)

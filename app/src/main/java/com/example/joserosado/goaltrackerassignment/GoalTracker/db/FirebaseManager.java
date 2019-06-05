@@ -38,12 +38,13 @@ public final class FirebaseManager {
         db = FirebaseFirestore.getInstance();
     }
 
-    public Task<Void> createAccount(String email, String password) {
-        return auth.createUserWithEmailAndPassword(email, password).onSuccessTask(result -> {return addUser();} )
+    public Task<AuthResult> createAccount(String email, String password) {
+        return auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(resultTask -> {
                     if(resultTask.isSuccessful())
                     {
                         Log.d(AUTH_TAG, "createUserWithEmail:success");
+                        addUser();
                         signOut();
                     }else
                     {
@@ -76,9 +77,10 @@ public final class FirebaseManager {
 
     private Task<Void> addUser()
     {
+        FirebaseUser user = getSignedInUser();
         HashMap<String, Object> map = new HashMap<>();
-        map.put("UserId", getSignedInUser().getUid());
-        return db.collection("users").document().set(map)
+        map.put("UserId", user.getUid());
+        return db.collection("users").document(user.getUid()).set(map)
         .addOnSuccessListener(task
                 -> Log.d(DB_TAG, "User added with ID: " + getSignedInUser().getUid()))
         .addOnFailureListener(exception
@@ -100,25 +102,26 @@ public final class FirebaseManager {
     public Task<Sprint> getCurrentSprint(){
         FirebaseUser user = getSignedInUser();
         DocumentReference ref = getCurrentSprintDocument(user);
-        return getSprint(ref);
+        return (ref == null ? createNewSprint(true) : getSprint(ref));
     }
 
     private Task<Sprint>getSprint(DocumentReference sprintRef)
     {
-        return sprintRef.get().onSuccessTask(result -> Tasks.call(() ->{
-            List<Event> events = getEventsFromSprint(sprintRef).getResult();
+        Task<List<Event>> sprintEventTask = getEventsFromSprint(sprintRef);
+        return sprintEventTask.onSuccessTask(result -> Tasks.call(() ->
+        {
             Sprint sprint = new Sprint();
             sprint.setSprintId(sprintRef.getId());
             sprint.Events.clear();
-            sprint.Events.addAll(events);
+            sprint.Events.addAll(result);
             return sprint;
-     }));
+        }));
     }
 
     public Task<Sprint> createNewSprint(boolean willBeCurrentSprint)
     {
         Task<Sprint> createSprint = Tasks.call(this::createNewSprintMethod);
-        if(willBeCurrentSprint && createSprint.isSuccessful())
+        if(willBeCurrentSprint)
         {
             createSprint.onSuccessTask(sprint -> Tasks.call(() -> {return setCurrentSprint(sprint);}));
         }
@@ -132,7 +135,7 @@ public final class FirebaseManager {
         {
             task = createEvent(event);
         }
-        if(task == null)
+        if(task != null)
         {
             task.continueWithTask(nothing -> Tasks.call(() ->
             {
@@ -164,26 +167,33 @@ public final class FirebaseManager {
 
     public Task<List<Event>>  getEventsFromSprint(DocumentReference sprintDocRef)
     {
-        return sprintDocRef.get().onSuccessTask(document -> Tasks.call( () -> {
-            List<DocumentReference> eventRefs;
-            eventRefs = document.get("events", new ArrayList<DocumentReference>().getClass());
-            List<Task<Event>> tasks = new ArrayList<>();
-            for(DocumentReference eventRef : eventRefs)
-            {
-                Task<Event> eventTask = eventRef.get().onSuccessTask(eventDoc ->Tasks.call(() -> {
-                   Map<String, Object> eventData = eventDoc.getData();
-                    return Event.pullData(eventData, eventDoc.getId());
-                }));
-                tasks.add(eventTask);
-            }
-            return Tasks.whenAllComplete(tasks).continueWithTask((finishedTasks -> Tasks.call(() ->{
-                List<Event> events = (List<Event>) finishedTasks.getResult().stream()
-                        .filter(task -> task.isSuccessful())
-                        .map(task -> {return task.getResult();})
-                        .collect(Collectors.toList());
-                return events;
-            }))).getResult();
-        }));
+        return sprintDocRef.get().onSuccessTask(document -> {
+            return Tasks.call(() -> {
+                List<DocumentReference> eventRefs;
+                eventRefs = document.get("events", new ArrayList<DocumentReference>().getClass());
+                List<Task<Event>> tasks = new ArrayList<>();
+                Task<List<Event>> taskPipeline = null;
+                for (int i = 0; i < eventRefs.size(); i++) {
+                    Task<Event> eventTask = eventRefs.get(i).get().onSuccessTask(eventDoc -> Tasks.call(() -> {
+                        Map<String, Object> eventData = eventDoc.getData();
+                        return Event.pullData(eventData, eventDoc.getId());
+                    }));
+                    if (taskPipeline == null) {
+                        taskPipeline = eventTask.continueWithTask(pipe -> Tasks.call(() -> {
+                            List<Event> events = new ArrayList<Event>();
+                            events.add(pipe.getResult());
+                            return events;
+                        }));
+                    } else {
+                        taskPipeline.continueWithTask(events -> eventTask.continueWithTask(event -> Tasks.call(() ->
+                        {
+                            return events.getResult().add(event.getResult());
+                        })));
+                    }
+                }
+                return taskPipeline.getResult();
+            });
+        });
     }
 
     public Task<Void> createEvent(Event event)
@@ -262,9 +272,9 @@ public final class FirebaseManager {
                 .filter(DocumentSnapshot::exists)
                 .map(documentSnapshot -> getSprint(documentSnapshot.getReference()))
                 .collect(Collectors.toList());
-            return (List<Sprint>) Tasks.whenAllComplete(sprintTasks).getResult().stream()
+            return Tasks.whenAllComplete(sprintTasks).getResult().stream()
             .filter(Task::isSuccessful)
-            .map(Task::getResult)
+            .map(sprintTask ->{ return (Sprint)sprintTask.getResult();})
             .collect(Collectors.toList());
         });
         return sprintsTask;

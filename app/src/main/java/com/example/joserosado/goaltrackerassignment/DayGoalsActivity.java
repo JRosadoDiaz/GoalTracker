@@ -13,13 +13,11 @@ import android.widget.Toast;
 import com.example.joserosado.goaltrackerassignment.GoalTracker.Models.Event;
 import com.example.joserosado.goaltrackerassignment.GoalTracker.Models.Sprint;
 import com.example.joserosado.goaltrackerassignment.GoalTracker.db.EFDatabaseHelper;
+import com.example.joserosado.goaltrackerassignment.GoalTracker.db.FirebaseManager;
 
 public class DayGoalsActivity extends AppCompatActivity {
-    EFDatabaseHelper helper = new EFDatabaseHelper();
-
+    FirebaseManager manager = new FirebaseManager();
   //  String day;
-
-
 
     //public DayGoalsActivity(){
       //  day = getIntent().getStringExtra("DayOfTheWeek");
@@ -47,19 +45,20 @@ public class DayGoalsActivity extends AppCompatActivity {
     }
 
     private void  createList(){
-        Sprint currentSprint = helper.GetCurrentSprint();
-        linearLayout = findViewById(R.id.day_list);
-        for (Event item : currentSprint.Events ) {
-            TextView tv = new TextView(this);
-            tv.setText(item.getTitle());
-            CheckBox cb = new CheckBox(this);
-            if(item.getIsDone() == true){
-                cb.setChecked(true);
+        manager.getCurrentSprint().addOnSuccessListener(currentSprint ->
+        {
+            linearLayout = DayGoalsActivity.this.findViewById(R.id.day_list);
+            for (Event item : currentSprint.Events) {
+                TextView tv = new TextView(DayGoalsActivity.this);
+                tv.setText(item.getTitle());
+                CheckBox cb = new CheckBox(DayGoalsActivity.this);
+                if (item.getIsDone() == true) {
+                    cb.setChecked(true);
+                }
+                linearLayout.addView(tv);
+                linearLayout.addView(cb);
             }
-            linearLayout.addView(tv);
-            linearLayout.addView(cb);
-
-        }
+        });
     }
 
     private void AddActivityIntent(String day){

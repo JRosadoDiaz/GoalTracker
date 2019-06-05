@@ -3,12 +3,18 @@ package com.example.joserosado.goaltrackerassignment;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.joserosado.goaltrackerassignment.GoalTracker.Models.Event;
+import com.example.joserosado.goaltrackerassignment.GoalTracker.db.FirebaseManager;
+
 public class AddActivity extends AppCompatActivity {
+
+    private FirebaseManager manager = new FirebaseManager();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +41,32 @@ public class AddActivity extends AppCompatActivity {
                 String eventDescription = Event_Description.getText().toString();
                 //System.out.println(eventDescription);
 
-                Toast toast = Toast.makeText(getApplicationContext(),eventName + " - " + eventDescription,Toast.LENGTH_SHORT);
-                toast.show();
+                if(eventName == null || eventName.isEmpty())
+                {
+
+                }else
+                {
+                    Event event = new Event();
+                    event.setTitle(eventName);
+                    event.setDescription(eventDescription == null ? "" : eventDescription);
+                    manager.getCurrentSprint().onSuccessTask(result -> manager.addEventToSprint(event, result))
+                    .addOnFailureListener(exception ->{
+                        failEventAdditionDisplay();
+                        Log.d("AddEvent", "AddingEventFailed", exception);
+                    }).addOnCompleteListener(task ->
+                    {
+                        if(task.isSuccessful()) Toast.makeText(getApplicationContext(),eventName + " - " + eventDescription,Toast.LENGTH_SHORT)
+                        .show();
+                        AddActivity.this.finish();
+                    });
+                }
             }
         });
+    }
+
+    private void failEventAdditionDisplay()
+    {
+        Toast.makeText(getApplicationContext(), "Adding Event Failed, please try again", Toast.LENGTH_SHORT).show();
     }
 
   //  private void notifTest(){
