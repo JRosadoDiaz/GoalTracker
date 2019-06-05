@@ -102,7 +102,7 @@ public final class FirebaseManager {
     public Task<Sprint> getCurrentSprint(){
         FirebaseUser user = getSignedInUser();
         DocumentReference ref = getCurrentSprintDocument(user);
-        return (ref == null ? createNewSprint(true) : getSprint(ref));
+        return (ref == null ? createNewSprint() : getSprint(ref));
     }
 
     private Task<Sprint>getSprint(DocumentReference sprintRef)
@@ -118,13 +118,13 @@ public final class FirebaseManager {
         }));
     }
 
-    public Task<Sprint> createNewSprint(boolean willBeCurrentSprint)
+    public Task<Sprint> createNewSprint()
     {
-        Task<Sprint> createSprint = Tasks.call(this::createNewSprintMethod);
-        if(willBeCurrentSprint)
-        {
-            createSprint.onSuccessTask(sprint -> Tasks.call(() -> {return setCurrentSprint(sprint);}));
-        }
+        Task<Sprint> createSprint = Tasks.call(this::createNewSprintMethod)
+                .continueWith(task -> {
+                    setCurrentSprint(task.getResult());
+                    return task.getResult();
+                });
         return createSprint;
     }
 

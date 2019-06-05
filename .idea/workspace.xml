@@ -15,13 +15,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e47baa89-59b3-4ff5-b910-a82d4594ae33" name="Default Changelist" comment="Default Changelist">
-      <change beforePath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/joserosado/goaltrackerassignment/AddActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/joserosado/goaltrackerassignment/AddActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/joserosado/goaltrackerassignment/DayGoalsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/joserosado/goaltrackerassignment/DayGoalsActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/joserosado/goaltrackerassignment/GoalTracker/db/FirebaseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/joserosado/goaltrackerassignment/GoalTracker/db/FirebaseManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/joserosado/goaltrackerassignment/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/joserosado/goaltrackerassignment/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/joserosado/goaltrackerassignment/WeekListActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/joserosado/goaltrackerassignment/WeekListActivity.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/build/classes/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -94,7 +89,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/joserosado/goaltrackerassignment/DayGoalsActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
+            <state relative-caret-position="119">
               <caret line="47" selection-start-line="47" selection-end-line="47" />
             </state>
           </provider>
@@ -103,11 +98,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/joserosado/goaltrackerassignment/GoalTracker/db/FirebaseManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-97">
-              <caret line="194" column="15" selection-start-line="194" selection-start-column="15" selection-end-line="194" selection-end-column="15" />
+            <state relative-caret-position="289">
+              <caret line="125" column="44" selection-start-line="125" selection-start-column="44" selection-end-line="125" selection-end-column="44" />
               <folding>
                 <element signature="e#7011#7018#0" expanded="true" />
-                <element signature="e#12769#12770#0" expanded="true" />
+                <element signature="e#12742#12743#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -146,6 +141,7 @@
     <findStrings>
       <find>setCurrentSprint</find>
       <find>addEvent</find>
+      <find>createNewSprintM</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -872,13 +868,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/joserosado/goaltrackerassignment/DayGoalsActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="47" selection-start-line="47" selection-end-line="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/joserosado/goaltrackerassignment/WeekListActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="563">
@@ -903,13 +892,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/joserosado/goaltrackerassignment/DayGoalsActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="47" selection-start-line="47" selection-end-line="47" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/joserosado/goaltrackerassignment/GoalTracker/db/FirebaseManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-97">
-          <caret line="194" column="15" selection-start-line="194" selection-start-column="15" selection-end-line="194" selection-end-column="15" />
+        <state relative-caret-position="289">
+          <caret line="125" column="44" selection-start-line="125" selection-start-column="44" selection-end-line="125" selection-end-column="44" />
           <folding>
             <element signature="e#7011#7018#0" expanded="true" />
-            <element signature="e#12769#12770#0" expanded="true" />
+            <element signature="e#12742#12743#0" expanded="true" />
           </folding>
         </state>
       </provider>
